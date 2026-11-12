@@ -311,7 +311,7 @@ tabs.addEventListener("click", e => {
 });
 
 // Galería: fotos en img/galeria/ (se cargan en este orden)
-const FOTOS = ["01.jpg", "05.jpg", "03.jpg", "04.jpg", "07.jpg", "02.jpg", "08.jpg", "06.jpg", "10.jpg", "09.jpg", "11.jpg"];
+const FOTOS = ["01.jpg", "05.jpg", "03.jpg", "07.jpg", "02.jpg", "08.jpg", "06.jpg", "10.jpg", "09.jpg", "11.jpg"];
 if (FOTOS.length) {
   document.getElementById("galeria").innerHTML = FOTOS.map(f => `<figure class="reveal"><img src="img/galeria/${f}" alt="Festivalazo 2025: comunidad, naturaleza y disfrute" loading="lazy"></figure>`).join("");
   document.getElementById("fotos").hidden = false;
