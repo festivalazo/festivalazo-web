@@ -87,7 +87,7 @@
 
 <section class="gallery" id="fotos" hidden>
   <div class="wrap">
-    <div class="eyebrow reveal">Fotos · El Origen 2026</div>
+    <div class="eyebrow reveal">Fotos · Festivalazo 2025</div>
     <h2 class="reveal">Así se <span class="it grad">vive</span></h2>
     <div class="masonry" id="galeria"></div>
   </div>
@@ -311,9 +311,9 @@ tabs.addEventListener("click", e => {
 });
 
 // Galería: fotos en img/galeria/ (se cargan en este orden)
-const FOTOS = ["08.jpg", "04.jpg", "01.jpg", "12.jpg", "03.jpg", "07.jpg", "09.jpg", "11.jpg", "02.jpg", "05.jpg", "13.jpg", "06.jpg", "10.jpg", "14.jpg"];
+const FOTOS = ["01.jpg", "05.jpg", "03.jpg", "04.jpg", "07.jpg", "02.jpg", "08.jpg", "06.jpg", "10.jpg", "09.jpg", "11.jpg"];
 if (FOTOS.length) {
-  document.getElementById("galeria").innerHTML = FOTOS.map(f => `<figure class="reveal"><img src="img/galeria/${f}" alt="Festivalazo El Origen 2026" loading="lazy"></figure>`).join("");
+  document.getElementById("galeria").innerHTML = FOTOS.map(f => `<figure class="reveal"><img src="img/galeria/${f}" alt="Festivalazo 2025: comunidad, naturaleza y disfrute" loading="lazy"></figure>`).join("");
   document.getElementById("fotos").hidden = false;
 }
 
