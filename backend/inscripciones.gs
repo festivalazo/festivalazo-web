@@ -21,13 +21,13 @@ var TABS = {
     ['intereses', 'Qué le interesa'], ['cuidado', 'Cuidando (1-10)'], ['otra', 'Otra práctica'],
     ['variete', 'Propuesta varieté'], ['salud', 'Salud / lesiones'], ['acuerdo', 'Acuerdo de cuidado'],
     ['politica', 'Acepta política de cancelación'], ['mensaje', 'Mensaje'],
-    ['pagado', 'Pago recibido'], ['notas', 'Notas'], ['comida', 'Comida pedida']
+    ['pagado', 'Pago recibido'], ['notas', 'Notas'], ['comida', 'Comida pedida'], ['lang', 'Idioma']
   ],
   Comidas: [
     ['fecha', 'Fecha'], ['nombre', 'Nombre y apellido'], ['email', 'Email'], ['whatsapp', 'Teléfono'],
     ['opcion', 'Opción'], ['precio', 'Precio'], ['sueltas', 'Comidas sueltas'], ['dieta', 'Dieta'],
     ['sintacc', 'Sin TACC'], ['alergias', 'Alergias'], ['mensaje', 'Mensaje'],
-    ['inscripto', '¿Inscripto al festival?'], ['pagado', 'Pago recibido'], ['notas', 'Notas']
+    ['inscripto', '¿Inscripto al festival?'], ['pagado', 'Pago recibido'], ['notas', 'Notas'], ['lang', 'Idioma']
   ]
 };
 
@@ -82,6 +82,18 @@ function money_(n) {
   return n ? '$' + Number(n).toLocaleString('es-AR') : 'a confirmar';
 }
 
+// Versión en inglés de los mails (para quien se anota desde festivalazo.com/en/)
+var PAGO_EN = '\nHow to pay (Argentine bank transfer):\nAlias: festivalazo.elorigen\nNaranja account, in the name of Aricelli Villoldo\n\n';
+var EN_NAMES = {
+  'Entrada general anticipada': 'Full pass (early bird)', 'Promo dupla': 'Duo deal',
+  'Pase viernes': 'Friday pass', 'Pase sábado': 'Saturday pass', 'Pase domingo': 'Sunday pass',
+  'Promo full veggie': 'Full veggie pack', 'Promo full carnívora': 'Full meat pack', 'Comidas sueltas': 'Single meals',
+  'Vegetariana': 'vegetarian', 'Vegana': 'vegan', 'Con carne': 'with meat'
+};
+function moneyEn_(n) {
+  return n ? 'ARS ' + Number(n).toLocaleString('en-US') : 'to confirm';
+}
+
 function rowFor_(name, d) {
   return TABS[name].map(function (c) { return d[c[0]] == null ? '' : d[c[0]]; });
 }
@@ -117,6 +129,8 @@ function doPost(e) {
 }
 
 function guardarInscripcion_(d, ins, com) {
+  var en = d.lang === 'en';
+  d.lang = en ? 'Inglés' : 'Español';
   var r = findEmail_(com, 'Comidas', d.email);
   if (r) {
     d.comida = com.getRange(r, colOf_('Comidas', 'opcion')).getValue();
@@ -132,6 +146,25 @@ function guardarInscripcion_(d, ins, com) {
   });
 
   var dosCuotas = String(d.pago || '').indexOf('Dos') === 0;
+  if (en) {
+    MailApp.sendEmail({
+      to: d.email,
+      replyTo: ORG_EMAIL,
+      name: 'Festivalazo',
+      subject: 'Festivalazo 2027 · We got your registration',
+      body: 'Hi ' + d.nombre + ',\n\n'
+        + 'Thanks for registering for Festivalazo 2027, our 10th edition! See you October 8–11.\n\n'
+        + 'Your ticket: ' + (EN_NAMES[d.entrada] || d.entrada) + ' · ' + moneyEn_(d.precio) + '\n'
+        + (dosCuotas ? 'You chose two installments: 50% now and 50% before September 10.\n' : '')
+        + PAGO_EN
+        + 'Your spot is confirmed once we receive the payment. Reply to this email with your receipt.\n'
+        + 'Paying from abroad? Just reply and we will find the best way for you.\n\n'
+        + (d.comida ? '' : 'Want to add meals for the weekend? Sign up at https://festivalazo.com/en/comida.html\n\n')
+        + 'Remember the campsite is paid separately, in cash, on arrival.\n\n'
+        + 'Big hug,\nThe Festivalazo team'
+    });
+    return;
+  }
   MailApp.sendEmail({
     to: d.email,
     replyTo: ORG_EMAIL,
@@ -150,6 +183,8 @@ function guardarInscripcion_(d, ins, com) {
 }
 
 function guardarComida_(d, ins, com) {
+  var en = d.lang === 'en';
+  d.lang = en ? 'Inglés' : 'Español';
   var r = findEmail_(ins, 'Inscripciones', d.email);
   d.inscripto = r ? 'Sí' : 'Todavía no';
   if (r) ins.getRange(r, colOf_('Inscripciones', 'comida')).setValue(d.opcion);
@@ -162,6 +197,23 @@ function guardarComida_(d, ins, com) {
     body: bodyFor_('Comidas', d)
   });
 
+  if (en) {
+    MailApp.sendEmail({
+      to: d.email,
+      replyTo: ORG_EMAIL,
+      name: 'Festivalazo',
+      subject: 'Festivalazo 2027 · We got your food order',
+      body: 'Hi ' + d.nombre + ',\n\n'
+        + 'Thanks for adding meals to your Festivalazo 2027 weekend!\n\n'
+        + 'Your order: ' + (EN_NAMES[d.opcion] || d.opcion) + (d.sueltas ? ' (' + d.sueltas + ')' : '') + ' · ' + (EN_NAMES[d.dieta] || d.dieta)
+        + (d.sintacc ? ' · gluten-free' : '') + '\n'
+        + 'Amount: ' + (d.precio ? moneyEn_(d.precio) : 'we will confirm it in another email') + '\n'
+        + (d.precio ? PAGO_EN + 'Reply to this email with your receipt.\n\n' : '\n')
+        + (r ? '' : "We couldn't find your festival registration with this email yet. If you haven't registered, do it at https://festivalazo.com/en/inscripcion.html\n\n")
+        + 'Big hug,\nThe Festivalazo team'
+    });
+    return;
+  }
   MailApp.sendEmail({
     to: d.email,
     replyTo: ORG_EMAIL,

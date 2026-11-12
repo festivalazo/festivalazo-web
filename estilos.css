@@ -306,3 +306,9 @@ footer .tag { font-family: "Playfair Display", serif; font-style: italic; font-s
   .hero::before, .hero-arch img, .marquee .track, .hero .eyebrow, .hero .bigLogo, .edicion .num, .edicion .ed, .hero-arch, .hero-bottom { animation: none; }
   html { scroll-behavior: auto; }
 }
+
+/* Selector de idioma */
+.nav-r { display: flex; align-items: center; gap: 12px; }
+.lang { display: inline-flex; align-items: center; gap: 6px; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 10px 12px; transition: color .2s, border-color .2s; }
+.lang b { color: var(--ink); font-weight: 700; }
+.lang:hover { color: var(--ink); border-color: var(--peach); }
