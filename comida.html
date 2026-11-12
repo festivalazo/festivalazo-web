@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comida · Festivalazo 2027</title>
+<meta name="description" content="Sumate a la comida de Festivalazo 2027.">
+<meta name="theme-color" content="#0d1a12">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,300..800&family=Playfair+Display:ital,wght@1,400;1,500;1,600&family=Special+Elite&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="estilos.css">
+<style>
+  .ins { padding: 130px 0 100px; position: relative; overflow-x: clip; }
+  .ins::before { content: ""; position: absolute; width: 900px; height: 900px; right: -300px; top: -380px; border-radius: 50%; filter: blur(80px); opacity: .4; pointer-events: none;
+    background: radial-gradient(circle, #fbe3c4, var(--apricot) 25%, var(--coral) 42%, var(--rose) 56%, transparent 70%); }
+  .ins .wrap { position: relative; max-width: 860px; }
+  .ins h1 { font-weight: 800; text-transform: uppercase; font-size: clamp(2.4rem, 7vw, 4.6rem); line-height: .92; letter-spacing: -.025em; margin-top: 22px; }
+  .ins h1 .it { display: block; font-size: .78em; }
+  .ins .lead { margin-top: 18px; }
+  form { margin-top: 44px; }
+  fieldset { border: 0; display: grid; gap: 22px; }
+  fieldset + fieldset { border-top: 1px solid var(--line); padding-top: 30px; }
+  legend { font-weight: 800; text-transform: uppercase; font-size: 1.3rem; margin-bottom: 18px; display: flex; gap: 12px; align-items: baseline; }
+  legend span { font-family: "Special Elite", monospace; font-weight: 400; color: var(--apricot); font-size: .95rem; }
+  .plans { display: grid; gap: 10px; }
+  .plan { position: relative; cursor: pointer; }
+  .plan input { position: absolute; opacity: 0; }
+  .plan .box { display: grid; grid-template-columns: 1fr auto; gap: 4px 16px; align-items: center; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; transition: .2s; }
+  .plan .box b { font-weight: 700; font-size: 1.05rem; }
+  .plan .box p { grid-column: 1; color: var(--muted); font-size: .9rem; }
+  .plan .box .pr { grid-row: 1 / 3; grid-column: 2; font-family: "Playfair Display", serif; font-style: italic; font-size: 1.6rem; white-space: nowrap; }
+  .plan:hover .box { border-color: var(--peach); }
+  .plan input:checked + .box { border-color: var(--apricot); background: linear-gradient(160deg, rgba(242,168,110,.14), transparent 70%); }
+  .plan input:focus-visible + .box { outline: 2px solid var(--peach); outline-offset: 2px; }
+  select { width: 100%; font: inherit; color: var(--ink); background: var(--bg2); border: 0; border-bottom: 1px solid var(--line); padding: 8px 0 10px; font-size: 1.05rem; }
+  .check { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; font-size: .98rem; }
+  .check input { margin-top: 5px; accent-color: var(--apricot); width: 18px; height: 18px; flex: none; }
+  .policy { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; color: var(--muted); font-size: .92rem; }
+  .policy b { color: var(--ink); }
+  .policy li { margin-left: 18px; margin-top: 4px; }
+  .q[hidden] { display: none; }
+  .q.bad .opts span, .q.bad select, .q.bad textarea { border-color: #ffb3a0; }
+  .total { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
+  .total .v { font-family: "Playfair Display", serif; font-style: italic; font-size: 2rem; }
+  .pay { margin-top: 18px; text-align: left; border: 1px solid var(--line); border-radius: 12px; padding: 18px 20px; }
+  .pay li { list-style: none; padding: 6px 0; border-bottom: 1px solid var(--line); }
+  .pay li:last-child { border-bottom: 0; }
+  .pay li span { color: var(--muted); font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; display: block; }
+  .done p { max-width: 520px; margin: 8px auto 0; }
+</style>
+</head>
+<body>
+
+<nav id="nav" class="solid">
+  <div class="wrap">
+    <a href="index.html" aria-label="Festivalazo, inicio"><span class="logo"></span></a>
+    <a class="btn line" href="index.html#comida" style="padding:12px 20px; font-size:.7rem">← Volver</a>
+  </div>
+</nav>
+
+<main class="ins">
+  <div class="wrap">
+    <div class="eyebrow">Festivalazo 2027 · 8 al 11 de octubre</div>
+    <h1>Sumate a la <span class="it grad">comida</span></h1>
+    <p class="lead">Cocina casera todo el finde, con opción veggie, vegana, sin TACC o con carne. Usá el mismo email que en tu inscripción así lo cruzamos. Te llega un mail con los datos para pagar.</p>
+
+    <form id="form" novalidate>
+      <input type="hidden" name="tipo" value="comida">
+      <fieldset>
+        <legend><span>01</span> Tu combo</legend>
+        <div class="q" data-req="radio" data-name="opcion">
+          <div class="plans">
+            <label class="plan"><input type="radio" name="opcion" value="Promo full veggie" data-precio="91500"><span class="box"><b>Promo full veggie</b><p>6 comidas + 3 desayunos + 2 noches de postres.</p><span class="pr">$91.500</span></span></label>
+            <label class="plan"><input type="radio" name="opcion" value="Promo full carnívora" data-precio="105500"><span class="box"><b>Promo full carnívora</b><p>6 comidas + 3 desayunos + 2 noches de postres.</p><span class="pr">$105.500</span></span></label>
+            <label class="plan"><input type="radio" name="opcion" value="Comidas sueltas" data-precio=""><span class="box"><b>Comidas sueltas</b><p>Elegí cuáles; te confirmamos el precio por mail.</p><span class="pr">a confirmar</span></span></label>
+          </div>
+          <p class="err">Elegí una opción.</p>
+        </div>
+        <div class="q" id="q-sueltas" data-req="radio" data-name="sueltas" hidden><span class="lbl-t">¿Qué comidas querés? <span class="req">*</span></span>
+          <div class="opts">
+            <label><input type="checkbox" name="sueltas" value="Desayunos"><span>Desayunos</span></label>
+            <label><input type="checkbox" name="sueltas" value="Viernes cena"><span>Viernes cena</span></label>
+            <label><input type="checkbox" name="sueltas" value="Sábado almuerzo"><span>Sábado almuerzo</span></label>
+            <label><input type="checkbox" name="sueltas" value="Sábado cena"><span>Sábado cena</span></label>
+            <label><input type="checkbox" name="sueltas" value="Domingo almuerzo"><span>Domingo almuerzo</span></label>
+            <label><input type="checkbox" name="sueltas" value="Domingo cena"><span>Domingo cena</span></label>
+            <label><input type="checkbox" name="sueltas" value="Lunes almuerzo"><span>Lunes almuerzo</span></label>
+          </div>
+          <p class="err">Elegí al menos una comida.</p>
+        </div>
+        <div class="q" data-req="radio" data-name="dieta"><span class="lbl-t">¿Cómo comés? <span class="req">*</span></span>
+          <div class="opts">
+            <label><input type="radio" name="dieta" value="Vegetariana"><span>Vegetariana</span></label>
+            <label><input type="radio" name="dieta" value="Vegana"><span>Vegana</span></label>
+            <label><input type="radio" name="dieta" value="Con carne"><span>Con carne</span></label>
+          </div>
+          <p class="err">Elegí una opción.</p>
+        </div>
+        <div class="q"><label class="check"><input type="checkbox" name="sintacc" value="Sí"><span>Necesito sin TACC (celiaquía)</span></label></div>
+        <div class="q"><label for="alergias">¿Alguna alergia o algo que no puedas comer? <span class="hint">opcional</span></label><input type="text" id="alergias" name="alergias"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend><span>02</span> Tus datos</legend>
+        <div class="two">
+          <div class="q" data-req="text"><label for="nombre">Nombre y apellido <span class="req">*</span></label><input type="text" id="nombre" name="nombre" autocomplete="name"><p class="err">Completá este dato.</p></div>
+          <div class="q" data-req="email"><label for="email">Email (el mismo de tu inscripción) <span class="req">*</span></label><input type="email" id="email" name="email" autocomplete="email"><p class="err">Revisá el email.</p></div>
+        </div>
+        <div class="q" data-req="text"><label for="whatsapp">Teléfono / WhatsApp <span class="req">*</span></label><input type="tel" id="whatsapp" name="whatsapp" autocomplete="tel" placeholder="11 2345 6789"><p class="err">Completá este dato.</p></div>
+        <div class="q"><label for="mensaje">¿Algo más que quieras contarnos?</label><textarea id="mensaje" name="mensaje"></textarea></div>
+      </fieldset>
+
+      <div class="total"><span class="caps" style="color:var(--muted); font-size:.75rem; letter-spacing:.2em; text-transform:uppercase">Total comida</span><span class="v grad" id="total">—</span></div>
+      <div><button class="btn fill" type="submit" id="send">Sumarme <span class="arr">→</span></button></div>
+
+      <div class="done">
+        <span class="it grad">¡Buen provecho, <span id="d-nombre"></span>!</span>
+        <p>Recibimos tu pedido de comida. Te mandamos un mail con esta info.</p>
+        <ul class="pay">
+          <li><span>Importe</span><b id="d-importe"></b></li>
+          <li><span>Alias</span><b>festivalazo.elorigen</b></li>
+          <li><span>Cuenta</span>Naranja · a nombre de Aricelli Villoldo</li>
+          <li><span>Comprobante</span>Mandalo respondiendo el mail que te llega.</li>
+        </ul>
+        <p style="margin-top:20px"><a class="btn line" href="index.html">Volver a la web</a> <a class="btn line" href="inscripcion.html">¿Todavía no te inscribiste?</a></p>
+      </div>
+    </form>
+  </div>
+</main>
+
+<script>
+// Misma dirección que la inscripción: el campo "tipo: comida" hace que se guarde en la pestaña Comidas.
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbz0aknpzk3-oK-5X6jORKGYdqEmJzur0gTHPdk763Zi1i0yWj58YdbolTvFQNi2IcFYZw/exec";
+
+const form = document.getElementById("form");
+const fmt = n => n ? "$" + Number(n).toLocaleString("es-AR") : "a confirmar";
+const precio = () => { const r = form.querySelector('input[name=opcion]:checked'); return r ? r.dataset.precio : ""; };
+form.addEventListener("change", e => {
+  if (e.target.name === "opcion") {
+    document.getElementById("total").textContent = fmt(precio());
+    document.getElementById("q-sueltas").hidden = e.target.value !== "Comidas sueltas";
+  }
+  const q = e.target.closest(".q.bad"); if (q) check(q);
+});
+
+function check(q) {
+  const t = q.dataset.req; let ok = true;
+  if (q.hidden) ok = true;
+  else if (t === "radio") ok = !!form.querySelector(`input[name=${q.dataset.name}]:checked`);
+  else { const v = q.querySelector("input").value.trim(); ok = !!v && (t !== "email" || /^\S+@\S+\.\S+$/.test(v)); }
+  q.classList.toggle("bad", !ok); return ok;
+}
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+  const bad = [...form.querySelectorAll(".q[data-req]")].filter(q => !check(q));
+  if (bad.length) { bad[0].scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+  const fd = new FormData(form), data = {};
+  for (const [k, v] of fd) data[k] = data[k] ? data[k] + ", " + v : v;
+  data.precio = precio();
+  const btn = document.getElementById("send");
+  btn.disabled = true; btn.textContent = "Enviando…";
+  try {
+    await fetch(ENDPOINT, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data) });
+    document.getElementById("d-nombre").textContent = data.nombre.split(" ")[0];
+    document.getElementById("d-importe").textContent = data.precio ? fmt(data.precio) : "Te lo confirmamos por mail";
+    form.classList.add("sent");
+    scrollTo({ top: form.offsetTop - 100, behavior: "smooth" });
+  } catch (err) {
+    btn.disabled = false; btn.innerHTML = 'Sumarme <span class="arr">→</span>';
+    alert("No pudimos enviar el pedido. Probá de nuevo en un ratito o escribinos por Instagram.");
+  }
+});
+</script>
+</body>
+</html>

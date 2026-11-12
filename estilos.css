@@ -43,6 +43,7 @@ h2 .it { display: block; font-size: .78em; line-height: 1.05; margin-top: .04em;
 .btn.fill { background: var(--grad); color: #1a120b; box-shadow: 0 12px 40px -12px rgba(242, 168, 110, .7); }
 .btn.fill:hover { transform: translateY(-2px); box-shadow: 0 18px 50px -12px rgba(242, 168, 110, .85); }
 .btn.line { border: 1px solid var(--line); color: var(--ink); }
+button.btn.line { background: transparent; cursor: pointer; }
 .btn.line:hover { border-color: var(--peach); }
 .btn .arr { transition: transform .25s; }
 .btn:hover .arr { transform: translateX(4px); }
@@ -166,6 +167,8 @@ nav .btn { padding: 12px 20px; font-size: .7rem; }
 .fold:not([hidden]) { animation: unfold .5s cubic-bezier(.2,.7,.2,1); }
 @keyframes unfold { from { opacity: 0; transform: translateY(-10px); } }
 .toggle[aria-expanded="true"] .arr { transform: rotate(180deg); }
+.food-cta { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; margin-top: 34px; }
+#menu-fold .food-cta { margin-top: 40px; }
 
 /* LUGAR */
 .place { overflow: hidden; }
